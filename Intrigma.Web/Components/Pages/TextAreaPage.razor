@@ -1,0 +1,43 @@
+@page "/TextAreaPage"
+<h3>TextAreaPage</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>TextArea with bindable value</p>
+        <TextArea @bind-Value="_textAreaStr" Style="height: 120px;"></TextArea>
+        <br>
+        <span>_textAreaStr: @_textAreaStr</span>
+    </div>
+    <div class="col-md-6">
+        <p>TextArea with Placeholder</p>
+        <TextArea @bind-Value="_textAreaStr1" Placeholder="Enter description" Style="height: 120px;"></TextArea>
+        <br>
+        <span>_textAreaStr1: @_textAreaStr1</span>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-6">
+        <p>TextArea with RoundedCorners</p>
+        <TextArea @bind-Value="_textAreaStrRoundedCorners"
+                  Placeholder="Enter description"
+                  Style="height: 160px;"
+                  RoundedCorners="true"></TextArea>
+        <br>
+        <span>_textAreaStrRoundedCorners: @_textAreaStrRoundedCorners</span>
+    </div>
+    <div class="col-md-6">
+        <p>TextArea with custom styles</p>
+        <TextArea @bind-Value="_textAreaStr2" Placeholder="Enter description"
+                  Style="height: 160px; background: #f4f4f4; border-radius: 6px"></TextArea>
+        <br>
+        <span>_textAreaStr2: @_textAreaStr2</span>
+    </div>
+</div>
+
+@code {
+    private string _textAreaStr;
+    private string _textAreaStr1;
+    private string _textAreaStr2;
+    private string _textAreaStrRoundedCorners;
+}

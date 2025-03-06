@@ -1,0 +1,24 @@
+::deep .form-control {
+    height: 50px !important;
+    border-radius: 0 !important;
+    border: 2px solid lightgray !important;
+}
+::deep .form-control.rounded-corners {
+    border-radius: 12px !important;
+}
+::deep .clear-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: gray;
+    z-index: 6;
+}
+.clear-icon:hover {
+    color: black;
+}
+::deep .form-control:focus, .form-check-input:focus {
+    box-shadow: unset;
+    border: 2px solid #4fa9e1 !important;
+}

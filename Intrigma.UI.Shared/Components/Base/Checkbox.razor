@@ -1,0 +1,18 @@
+<div class="cb-container">
+    <input type="checkbox"
+           id="@_cbId"
+           @bind-value="@IsChecked"
+           class="@_cssClasses"
+           style="@CheckboxStyles"
+           @bind-value:after="CheckboxChanged">
+    
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label @onclick="CheckboxChanged"
+               for="@_cbId"
+               class="@_labelCssClasses"
+               style="@LabelStyles">
+            @Label
+        </label>
+    }
+</div>

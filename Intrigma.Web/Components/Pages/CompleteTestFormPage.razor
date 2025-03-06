@@ -1,0 +1,165 @@
+@page "/complete-form"
+
+<h3>Employee Create</h3>
+<Checkbox @bind-IsChecked="@_isCheckedRoundedCorners"
+          Size="CheckboxSize.Large"
+          Label="Rounded corners?"
+          OnCheckedChanged="OnRoundedChanged"
+          UiType="CheckboxUiType.Primary" />
+<br>
+<div class="row">
+    <div class="col-5">
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-7">
+                    <TextInput @bind-Value="@_employee.Name"
+                               Label="Name"
+                               RoundedCorners="_isCheckedRoundedCorners"
+                               Placeholder="Enter value"
+                               For="() => _employee.Name"
+                               @key="Guid.NewGuid().ToString()"/>
+                </div>
+                <div class="col-5">
+                    <DropdownList @bind-Value="_employee.Department"
+                                  RoundedCorners="_isCheckedRoundedCorners"
+                                  ShowSearch="true"
+                                  DropdownItems="departments"
+                                  ActivatorPlaceholderText="Select a department"
+                                  @key="Guid.NewGuid().ToString()" />
+                </div>
+            </div>
+
+            <br>
+            <TextInput @bind-Value="@_employee.Email"
+                       RoundedCorners="_isCheckedRoundedCorners"
+                       Label="Email"
+                       ShowClearIcon="true"
+                       Placeholder="Enter email"
+                       For="() => _employee.Email"
+                       @key="Guid.NewGuid().ToString()" />
+            <br>
+            <TextArea @bind-Value="_employee.About"
+                      RoundedCorners="_isCheckedRoundedCorners"
+                      Placeholder="Enter description"
+                      Style="height: 160px;"
+                      @key="Guid.NewGuid().ToString()"></TextArea>
+            <br>
+            <br>
+            <Checkbox @bind-IsChecked="_employee.HasAgreedTermsAndConditions"
+                      Size="CheckboxSize.Large"
+                      Label="Do you agree with the terms and conditions?"
+                      UiType="CheckboxUiType.Success"  />
+            <br>
+            <Button Type="button"
+                    Styles="width: 100%;"
+                    ButtonType="ButtonType.Success"
+                    Size="ButtonSize.Large"
+                    RoundedCorners="_isCheckedRoundedCorners"
+                    OnClickCb="OnClickLoading"
+                    @key="Guid.NewGuid().ToString()">
+                @if (_loading)
+                {
+                    <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status">
+                    </div>
+                }
+                else
+                {
+                    <span>Click me!</span>
+                }
+            </Button>
+        </div>
+    </div>
+    <div class="col-2 d-flex justify-content-center" style="width: 60px;">
+        <div style="height: 100%; width: 1px; background: lightgray"></div>
+    </div>
+    <div class="col-5">
+        <div class="container">
+            @foreach (var (emp, index) in _employees.Select((v, i)=>(v, i)))
+            {
+                <div class="emp-item">
+                    <div class="row">
+                        <div class="col-4 d-flex flex-column">
+                            <span style="font-size: 12px">Name</span>
+                            <span style="font-size: 18px; font-weight: 600">@emp.Name</span>
+                        </div>
+                        <div class="col-4 d-flex flex-column">
+                            <span style="font-size: 12px">Department</span>
+                            <span style="font-size: 18px; font-weight: 600">@emp.Department</span>
+                        </div>
+                        <div class="col-4 d-flex flex-column">
+                            <span style="font-size: 12px">Email</span>
+                            <span style="font-size: 18px; font-weight: 600">@emp.Email</span>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <span style="font-size: 12px">About</span>
+                        <span style="font-size: 18px; font-weight: 500">@emp.About</span>
+                    </div>
+                </div>
+                @if (index != _employees.Count - 1)
+                {
+                    <hr />
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private Employee _employee = new();
+    private List<string> departments = new List<string>() {"HR", "Admin", "Tech", "Accounts", "Cleaning"};
+    private bool _loading;
+    private List<Employee> _employees = new()
+    {
+        new Employee()
+        {
+            Name = "Safi",
+            Department = "Tech",
+            About = "I love playing football and my favorite video game is FIFA!",
+            Email = "S@s.com"
+        }
+    };
+    private bool _isCheckedRoundedCorners;
+
+    private void OnClickLoading()
+    {
+        _loading = true;
+        Task.Delay(3000);
+        _employees.Add(_employee);
+        _employee = new();
+        StateHasChanged();
+        _loading = false;
+    }
+    
+    
+    public class Employee
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Department { get; set; }
+        public string About { get; set; }
+        public bool HasAgreedTermsAndConditions { get; set; }
+    }
+
+    private void OnRoundedChanged(bool obj)
+    {
+        StateHasChanged();
+    }
+
+}
+
+<style>
+    .container {
+        padding: 26px 20px;
+        background: #f0f0f0;
+        height: 100%;
+        border-radius: @( _isCheckedRoundedCorners ? "16px" : "0" );
+    }
+    .emp-item {
+        padding: 20px 30px;
+        background: white;
+        border: 2px solid lightgray;
+        border-radius: @( _isCheckedRoundedCorners ? "16px" : "0" );
+
+    }
+</style>

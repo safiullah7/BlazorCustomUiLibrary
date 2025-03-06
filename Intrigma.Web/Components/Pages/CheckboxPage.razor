@@ -1,0 +1,95 @@
+@page "/CheckboxPage"
+
+<div class="row">
+    <p>Simple checkbox usage</p>
+    <br>
+    <br>
+    <Checkbox @bind-IsChecked="_isChecked" Label="Over 18?" />
+    <br>
+    <span>ischecked: @_isChecked</span>
+</div>
+
+<hr>
+
+<p>checkbox sizes</p>
+<br>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <span>Small size</span>
+        <Checkbox @bind-IsChecked="_isCheckedSm" Size="CheckboxSize.Small" Label="Over 18?" />
+        <br>
+        <span>_isCheckedSm: @_isCheckedSm</span>
+        <br>
+    </div>
+    <div class="col-md-6 mb-4">
+        <span>Medium size</span>
+        <Checkbox @bind-IsChecked="_isCheckedMd" Size="CheckboxSize.Medium" Label="Over 18?" />
+        <br>
+        <span>_isCheckedMd: @_isCheckedMd</span>
+        <br>
+    </div>
+    <div class="col-md-6 mb-4">
+        <span>Large size</span>
+        <Checkbox @bind-IsChecked="_isCheckedLg" Size="CheckboxSize.Large" Label="Over 18?" />
+        <br>
+        <span>_isCheckedLg: @_isCheckedLg</span>
+        <br>
+    </div>
+    <div class="col-md-6 mb-4">
+        <span>XLarge size</span>
+        <Checkbox @bind-IsChecked="_isCheckedXlg" Size="CheckboxSize.XLarge" Label="Over 18?" />
+        <br>
+        <span>_isCheckedXlg: @_isCheckedXlg</span>
+        <br>
+    </div>
+</div>
+
+<hr>
+
+<p>checkbox UI types</p>
+<br>
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <span>Primary</span>
+        <Checkbox @bind-IsChecked="_isCheckedPrimary"
+                  Size="CheckboxSize.Large"
+                  Label="Over 18?"
+                  UiType="CheckboxUiType.Primary" />
+        <br>
+        <span>_isCheckedPrimary: @_isCheckedPrimary</span>
+        <br>
+    </div>
+    <div class="col-md-6 mb-4">
+        <span>Secondary</span>
+        <Checkbox @bind-IsChecked="_isCheckedSecondary"
+                  Size="CheckboxSize.Large"
+                  Label="Over 18?"
+                  UiType="CheckboxUiType.Secondary"  />
+        <br>
+        <span>_isCheckedSecondary: @_isCheckedSecondary</span>
+        <br>
+    </div>
+    <div class="col-md-6 mb-4">
+        <span>Success</span>
+        <Checkbox @bind-IsChecked="_isCheckedSuccess"
+                  Size="CheckboxSize.Large"
+                  Label="Over 18?"
+                  UiType="CheckboxUiType.Success"  />
+        <br>
+        <span>_isCheckedSuccess: @_isCheckedSuccess</span>
+        <br>
+    </div>
+</div>
+
+@code {
+    private bool _isChecked;
+    private bool _isCheckedSm;
+    private bool _isCheckedMd;
+    private bool _isCheckedLg;
+    private bool _isCheckedXlg;
+    
+    private bool _isCheckedPrimary;
+    private bool _isCheckedSecondary;
+    private bool _isCheckedSuccess;
+}

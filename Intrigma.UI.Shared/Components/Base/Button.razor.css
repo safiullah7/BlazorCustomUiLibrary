@@ -1,0 +1,27 @@
+.custom-button {
+    width: auto;
+    min-width: 130px;
+    height: 38px;
+    padding: 2px 26px;
+}
+::deep .custom-button .spinner-border {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+}
+
+.button-rounded-corner {
+    border-radius: 12px;
+}
+
+.button-sm {
+    height: 32px;
+    font-size: 14px;
+}
+.button-md {
+    height: 38px;
+    font-size: 18px;
+}
+.button-lg {
+    height: 48px;
+    font-size: 20px;
+}

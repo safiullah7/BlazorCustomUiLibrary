@@ -1,0 +1,22 @@
+<div class="@ColSize position-relative">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label>@Label</label>
+    }
+
+    <div class="input-group">
+        <InputText Value="@Value" 
+                   ValueChanged="ValueChanged" 
+                   ValueExpression="For" 
+                   placeholder="@Placeholder" 
+                   @oninput="OnInput" 
+                   class="@_cssClasses"/>
+
+        @if (ShowClearIcon)
+        {
+            <span class="clear-icon" @onclick="ClearText">
+                ✖️
+            </span>
+        }
+    </div>
+</div>

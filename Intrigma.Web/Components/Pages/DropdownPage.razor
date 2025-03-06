@@ -1,0 +1,98 @@
+@page "/dropdownlist"
+
+<div class="row">
+    <div class="col-md-4">
+        <p>Basic Dropdown use case with List of strings</p>
+        <DropdownList @bind-Value="_selectedFruit" DropdownItems="fruits" ActivatorPlaceholderText="Select a fruit"/>
+        <br>
+        <span class="mt-2">selectedValue: @_selectedFruit</span>
+    </div>
+    <div class="col-md-4">
+        <p>Filterable dropdown with list of strings</p>
+        <DropdownList @bind-Value="_selectedFruit2" ShowSearch="true" DropdownItems="fruits" ActivatorPlaceholderText="Select a fruit"/>
+        <br>
+        <span class="mt-2">selectedValue: @_selectedFruit2</span>
+    </div>
+    <div class="col-md-4">
+        <p>Filterable dropdown with RoundedCorners</p>
+        <DropdownList @bind-Value="_selectedFruitRoundedCorner"
+                      ShowSearch="true"
+                      RoundedCorners="true"
+                      DropdownItems="fruits"
+                      ActivatorPlaceholderText="Select a fruit"/>
+        <br>
+        <span class="mt-2">_selectedFruitRoundedCorner: @_selectedFruitRoundedCorner</span>
+    </div>
+</div>
+<hr class="my-5">
+<div class="row">
+    <div class="col-md-4">
+        <p>Filterable dropdown with Shadow set to true</p>
+        <DropdownList @bind-Value="_selectedFruitShadow"
+                      ShowBoxShadowOnBody="true"
+                      ShowSearch="true"
+                      RoundedCorners="false"
+                      DropdownItems="fruits"
+                      ActivatorPlaceholderText="Select a fruit"/>
+        <br>
+        <span class="mt-2">_selectedFruitShadow: @_selectedFruitShadow</span>
+    </div>
+    <div class="col-md-4">
+        <p>Generic typed Dropdown with List of T objects</p>
+        <DropdownList @bind-Value="_selectedFruitTyped" DropdownItems="tmpLst" ActivatorPlaceholderText="Select a fruit">
+            <SelectedValueFragment Context="selectedValue">
+                <span class="activator-text">@selectedValue.Value</span>
+            </SelectedValueFragment>
+            <ItemFragment Context="fruit">
+                <div class="d-flex gap-2">
+                    <img width="30px" height="30px" style="border-radius: 50%; border: 1px solid lightgray" src="@fruit.Image"/>
+                    <span style="font-size: 20px;">@fruit.Value</span>
+                </div>
+            </ItemFragment>
+        </DropdownList>
+        <br>
+        <span class="mt-2">selectedValue: @_selectedFruitTyped?.Value</span>
+    </div>
+    <div class="col-md-4">
+        <p>Filterable Generic typed Dropdown with List of T objects and custom UI for list items</p>
+        <DropdownList @bind-Value="_selectedFruitTyped2" ValuePropertyName="Value" ShowSearch="true" DropdownItems="tmpLst" ActivatorPlaceholderText="Select a fruit">
+            <SelectedValueFragment Context="selectedValue">
+                <span class="activator-text">@selectedValue.Value</span>
+            </SelectedValueFragment>
+            <ItemFragment Context="fruit">
+                <div class="d-flex gap-3 align-items-center">
+                    <img width="40px" height="40px" style="border-radius: 50%; border: 1px solid lightgray" src="@fruit.Image"/>
+                    <span style="font-size: 18px;">@fruit.Value</span>
+                </div>
+            </ItemFragment>
+        </DropdownList>
+        <br>
+        <span class="mt-2">selectedValue: @_selectedFruitTyped2?.Value</span>
+    </div>
+</div>
+
+@code {
+    private List<string> fruits = new List<string>() {"apple", "orange", "mango", "banana", "melon"};
+    private List<string> fruits2 = new List<string>() {"apple", "orange", "mango", "banana", "melon"};
+    private string _selectedFruit;
+    private string _selectedFruit2;
+    private string _selectedFruitRoundedCorner;
+    private string _selectedFruitShadow;
+    private temp _selectedFruitTyped;
+    private temp _selectedFruitTyped2;
+
+    private List<temp> tmpLst = new List<temp>()
+    {
+        new temp() {Image = "https://www.collinsdictionary.com/images/full/apple_158989157.jpg", Value = "Apple"},
+        new temp() {Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZbB_doR9LVg_xVbDXOOZc3TNbgNCEIzLLKw&s", Value = "Orange"},
+        new temp() {Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZbB_doR9LVg_xVbDXOOZc3TNbgNCEIzLLKw&s", Value = "Mango"},
+        new temp() {Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5qXPkPyrBFk5Z9Kq4A7bghJcqxnQAi-Ikhw&s", Value = "Banana"},
+        new temp() {Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQefNEPIPN_9zZs-gooD8T6GJddHdEc9dEbiA&s", Value = "Melon"},
+    };
+
+    public class temp
+    {
+        public string Image { get; set; }
+        public string Value { get; set; }
+    }
+}

@@ -1,0 +1,13 @@
+.textarea {
+    width: 100%;
+    border: 2px solid lightgray;
+    padding: 5px 10px;
+}
+.textarea:focus, .textarea:active, .textarea:focus-visible {
+    outline: none !important;
+    border: 2px solid #4fa9e1 !important;
+    background-color: white !important;
+}
+.textarea.rounded-corners {
+    border-radius: 14px;
+}

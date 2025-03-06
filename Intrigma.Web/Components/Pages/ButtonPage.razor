@@ -1,0 +1,131 @@
+@page "/buttons"
+
+<h3>ButtonPage</h3>
+<div class="row">
+        <p>Custom button</p>
+        <Button Type="button"
+                OnClickCb="OnClick">
+                Custom button
+        </Button>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+        <p>Button Sizes</p>
+        <div class="col-md-3">
+                <Button Type="button"
+                        ButtonType="ButtonType.Primary"
+                        Size="ButtonSize.Small"
+                        OnClickCb="OnClick">
+                        Small button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <Button Type="button"
+                        ButtonType="ButtonType.Primary"
+                        Size="ButtonSize.Medium"
+                        OnClickCb="OnClick">
+                        Medium button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <Button Type="button"
+                        ButtonType="ButtonType.Primary"
+                        Size="ButtonSize.Large"
+                        OnClickCb="OnClick">
+                        Large button
+                </Button>
+        </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+        <p>Button UI types</p>
+        <div class="col-md-3">
+                <p>Primary</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Primary"
+                        OnClickCb="OnClick">
+                        Primary button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <p>Secondary</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Secondary"
+                        OnClickCb="OnClick">
+                        Secondary button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <p>Danger</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Danger"
+                        OnClickCb="OnClick">
+                        Danger button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <p>Warning</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Warning"
+                        OnClickCb="OnClick">
+                        Warning button
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <p>Success</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Success"
+                        OnClickCb="OnClick">
+                        Success button
+                </Button>
+        </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+        <div class="col-md-3">
+                <p>button with RoundedCorners</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Success"
+                        RoundedCorners="true"
+                        OnClickCb="OnClick">
+                        Roundedbutton
+                </Button>
+        </div>
+        <div class="col-md-3">
+                <p>Loading button</p>
+                <Button Type="button"
+                        ButtonType="ButtonType.Success"
+                        RoundedCorners="true"
+                        OnClickCb="OnClickLoading">
+                        @if (_loading)
+                        {
+                                <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status">
+                                </div>
+                        }
+                        else
+                        {
+                                <span>Click me!</span>
+                        }
+                </Button>
+        </div>
+</div>
+
+@code {
+        private bool _loading;
+
+        private void OnClick(MouseEventArgs obj)
+        {
+        }
+
+        private void OnClickLoading()
+        {
+                _loading = !_loading;
+        }
+
+}

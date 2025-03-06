@@ -1,0 +1,54 @@
+@page "/TextInputPage"
+
+<div class="row">
+    <div class="col-md-3">
+        <p>Basic textbox with bindable input</p>
+        <TextInput @bind-Value="@_tbValue" For="() => _tbValue" />
+        <br>
+        <span>_tbValue: @_tbValue</span>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <p>textbox with bindable input and custom Label</p>
+        <TextInput @bind-Value="@_tbValue2" Label="Name" For="() => _tbValue" />
+        <br>
+        <span>_tbValue2: @_tbValue2</span>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-3">
+        <p>textbox with RoundedCorners</p>
+        <TextInput @bind-Value="@_tbValueRoundedCorners" RoundedCorners="true" Label="Name" For="() => _tbValue" />
+        <br>
+        <span>_tbValueRoundedCorners: @_tbValueRoundedCorners</span>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-3">
+        <p>textbox with bindable input, custom Label and <b>Placeholder</b></p>
+        <TextInput @bind-Value="@_tbValue3" Label="Name" Placeholder="Enter value" For="() => _tbValue" />
+        <br>
+        <span>_tbValue3: @_tbValue3</span>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <p>textbox with bindable input, custom Label, Placeholder and <b>Clear icon</b></p>
+        <TextInput @bind-Value="@_tbValue4" Label="Name" ShowClearIcon="true" Placeholder="Enter value" For="() => _tbValue" />
+        <br>
+        <span>_tbValue3: @_tbValue4</span>
+    </div>
+</div>
+
+@code {
+    private string _tbValue;
+    private string _tbValue2;
+    private string _tbValue3;
+    private string _tbValue4;
+    private string _tbValueRoundedCorners;
+}

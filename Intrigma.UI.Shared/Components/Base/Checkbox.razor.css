@@ -1,0 +1,47 @@
+.cb-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    width: fit-content;
+}
+.cb-container:hover {
+    cursor: pointer;
+    background: #edebeb;
+    border-radius: 6px;
+}
+.cb:hover {
+    cursor: pointer;
+}
+
+.cb-primary {  }
+.cb-secondary { accent-color: lightgray }
+.cb-success { accent-color: lightgreen }
+
+.lb {
+    cursor: pointer !important;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.cb-sm {
+    width: 15px;
+    height: 15px;
+}
+.cb-md {
+    width: 20px;
+    height: 20px;
+}
+.cb-lg {
+    width: 25px;
+    height: 25px;
+}
+.cb-xlg {
+    width: 30px;
+    height: 30px;
+}
+.lb-sm { font-size: 14px;}
+.lb-md { font-size: 16px; }
+.lb-lg { font-size: 18px; }
+.lb-xlg { font-size: 20px; }

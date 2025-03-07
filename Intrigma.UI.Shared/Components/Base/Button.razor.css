@@ -3,13 +3,14 @@
     min-width: 130px;
     height: 38px;
     padding: 2px 26px;
+    border-radius: 5px;
 }
 ::deep .custom-button .spinner-border {
     width: 1.5rem !important;
     height: 1.5rem !important;
 }
 
-.button-rounded-corner {
+.custom-button.rounded-corners {
     border-radius: 12px;
 }
 

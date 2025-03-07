@@ -1,6 +1,13 @@
-<textarea @oninput="HandleOnChange"
-          placeholder="@Placeholder"
-          style="@Style"
-          class="@_cssClasses">
-    @_value
-</textarea>
+<div class="position-relative">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label>@Label</label>
+    }
+    <InputTextArea rows="@Rows"
+                   Value="@_value"
+                   ValueChanged="ValueChanged"
+                   ValueExpression="For"
+                   placeholder="@Placeholder"
+                   @oninput="HandleOnChange"
+                   class="@_cssClasses"/>
+</div>

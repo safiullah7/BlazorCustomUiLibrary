@@ -14,8 +14,57 @@ public partial class Button
     [Parameter] public EventCallback<MouseEventArgs> OnClickCb { get; set; }
 
     private string _cssClasses = "btn custom-button";
+    private bool _roundedCorners;
+
+    protected override void OnParametersSet()
+    {
+        if (_roundedCorners != RoundedCorners)
+        {
+            _roundedCorners = RoundedCorners;
+            if (_roundedCorners)
+            {
+                _cssClasses += " rounded-corners";
+            }
+            else
+            {
+                _cssClasses = _cssClasses.Replace("rounded-corners", "");
+            }
+        }
+        base.OnParametersSet();
+    }
 
     protected override void OnInitialized()
+    {
+        SetButtonType();
+
+        _roundedCorners = RoundedCorners;
+        if (_roundedCorners)
+        {
+            _cssClasses += " rounded-corners";
+        }
+        
+        SetButtonSize();
+        
+        base.OnInitialized();
+    }
+
+    private void SetButtonSize()
+    {
+        switch (Size)
+        {
+            case ButtonSize.Small:
+                _cssClasses += " button-sm";
+                break;
+            case ButtonSize.Medium:
+                _cssClasses += " button-md";
+                break;
+            case ButtonSize.Large:
+                _cssClasses += " button-lg";
+                break;
+        }
+    }
+
+    private void SetButtonType()
     {
         switch (ButtonType)
         {
@@ -35,24 +84,6 @@ public partial class Button
                 _cssClasses += " btn-success";
                 break;
         }
-
-        if (RoundedCorners)
-            _cssClasses += " button-rounded-corner";
-        
-        switch (Size)
-        {
-            case ButtonSize.Small:
-                _cssClasses += " button-sm";
-                break;
-            case ButtonSize.Medium:
-                _cssClasses += " button-md";
-                break;
-            case ButtonSize.Large:
-                _cssClasses += " button-lg";
-                break;
-        }
-        
-        base.OnInitialized();
     }
 
     private async Task OnClick()

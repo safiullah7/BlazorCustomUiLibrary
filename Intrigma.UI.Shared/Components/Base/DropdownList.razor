@@ -1,6 +1,10 @@
 @typeparam T
 
 <div class="dropdown" @ref="DropdownRef">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label>@Label</label>
+    }
     <div class="activator @_cssClassesActivator @(isOpen ? "activator-active" : "")" @onclick="ToggleDropdown">
         <div class="chevron-container">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

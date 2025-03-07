@@ -7,6 +7,8 @@ namespace Intrigma.UI.Shared.Components.Base;
 public partial class DropdownList<T> : IAsyncDisposable
 {
     [Inject] public IJSRuntime JsRuntime { get; set; } = default!;
+    
+    [Parameter] public string Label { get; set; } = string.Empty;
     [Parameter] public List<T> DropdownItems { get; set; } = new();
     [Parameter] public T Value { get; set; } = default!;
     [Parameter] public RenderFragment<T> SelectedValueFragment { get; set; } = default!;
@@ -26,10 +28,32 @@ public partial class DropdownList<T> : IAsyncDisposable
     private List<T> _filteredItems;
     private string _cssClassesActivator;
     private string _cssClassesBody;
+    private bool _roundedCorners;
 
+    protected override void OnParametersSet()
+    {
+        if (_roundedCorners != RoundedCorners)
+        {
+            _roundedCorners = RoundedCorners;
+            if (_roundedCorners)
+            {
+                _cssClassesActivator += " rounded-corners";
+                _cssClassesBody += " rounded-corners";
+            }
+            else
+            {
+                _cssClassesActivator = _cssClassesActivator.Replace("rounded-corners", "");
+                _cssClassesBody = _cssClassesBody.Replace("rounded-corners", "");
+            }
+        }
+        
+        base.OnParametersSet();
+    }
+    
     protected override void OnInitialized()
     {
         _filteredItems = new List<T>(DropdownItems);
+        _roundedCorners = RoundedCorners;
         if (RoundedCorners)
         {
             _cssClassesActivator += " rounded-corners";

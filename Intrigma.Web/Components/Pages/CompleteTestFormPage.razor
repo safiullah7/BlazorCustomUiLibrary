@@ -11,38 +11,38 @@
     <div class="col-5">
         <div class="container">
             <div class="row align-items-end">
-                <div class="col-7">
+                <div class="col-6">
                     <TextInput @bind-Value="@_employee.Name"
                                Label="Name"
                                RoundedCorners="_isCheckedRoundedCorners"
                                Placeholder="Enter value"
-                               For="() => _employee.Name"
-                               @key="Guid.NewGuid().ToString()"/>
+                               For="() => _employee.Name" />
                 </div>
-                <div class="col-5">
+                <div class="col-6">
                     <DropdownList @bind-Value="_employee.Department"
+                                  Label="Department"
                                   RoundedCorners="_isCheckedRoundedCorners"
                                   ShowSearch="true"
                                   DropdownItems="departments"
-                                  ActivatorPlaceholderText="Select a department"
-                                  @key="Guid.NewGuid().ToString()" />
+                                  ActivatorPlaceholderText="Select a department" />
                 </div>
             </div>
 
             <br>
             <TextInput @bind-Value="@_employee.Email"
                        RoundedCorners="_isCheckedRoundedCorners"
+                       Type="email"
                        Label="Email"
                        ShowClearIcon="true"
                        Placeholder="Enter email"
-                       For="() => _employee.Email"
-                       @key="Guid.NewGuid().ToString()" />
+                       For="() => _employee.Email" />
             <br>
             <TextArea @bind-Value="_employee.About"
+                      Label="About"
                       RoundedCorners="_isCheckedRoundedCorners"
                       Placeholder="Enter description"
-                      Style="height: 160px;"
-                      @key="Guid.NewGuid().ToString()"></TextArea>
+                      For="() => _employee.About"
+                      Style="height: 160px;"></TextArea>
             <br>
             <br>
             <Checkbox @bind-IsChecked="_employee.HasAgreedTermsAndConditions"
@@ -55,8 +55,7 @@
                     ButtonType="ButtonType.Success"
                     Size="ButtonSize.Large"
                     RoundedCorners="_isCheckedRoundedCorners"
-                    OnClickCb="OnClickLoading"
-                    @key="Guid.NewGuid().ToString()">
+                    OnClickCb="OnClickLoading">
                 @if (_loading)
                 {
                     <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status">
@@ -121,13 +120,14 @@
     };
     private bool _isCheckedRoundedCorners;
 
-    private void OnClickLoading()
+    private async Task OnClickLoading()
     {
         _loading = true;
-        Task.Delay(3000);
+        await Task.Delay(3000);
         _employees.Add(_employee);
         _employee = new();
-        StateHasChanged();
+        // Notify bindings explicitly (triggers re-render)
+        await InvokeAsync(StateHasChanged);
         _loading = false;
     }
     

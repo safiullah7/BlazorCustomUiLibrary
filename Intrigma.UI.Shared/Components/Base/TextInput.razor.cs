@@ -7,6 +7,7 @@ public partial class TextInput
 {
     [Parameter] public string Label { get; set; } = string.Empty;
     [Parameter] public string Value { get; set; }
+    [Parameter] public string Type { get; set; } = "text";
     [Parameter] public string Placeholder { get; set; }
     [Parameter] public Expression<Func<string>> For { get; set; } 
     [Parameter] public EventCallback<string> ValueChanged { get; set; }
@@ -16,10 +17,30 @@ public partial class TextInput
     [Parameter] public bool RoundedCorners { get; set; }
 
     private string _cssClasses = "form-control ";
-    
+    private bool _roundedCorners;
+
+    protected override void OnParametersSet()
+    {
+        if (_roundedCorners != RoundedCorners)
+        {
+            _roundedCorners = RoundedCorners;
+            if (_roundedCorners)
+            {
+                _cssClasses += " rounded-corners";
+            }
+            else
+            {
+                _cssClasses = _cssClasses.Replace("rounded-corners", "");
+            }
+        }
+        
+        base.OnParametersSet();
+    }
+
     protected override void OnInitialized()
     {
-        if (RoundedCorners)
+        _roundedCorners = RoundedCorners;
+        if (_roundedCorners)
         {
             _cssClasses += " rounded-corners";
         }

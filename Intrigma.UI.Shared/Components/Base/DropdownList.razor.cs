@@ -1,5 +1,7 @@
+using System.Linq.Expressions;
 using Microsoft.AspNetCore.Components;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 
 namespace Intrigma.UI.Shared.Components.Base;
@@ -7,6 +9,8 @@ namespace Intrigma.UI.Shared.Components.Base;
 public partial class DropdownList<T> : IAsyncDisposable
 {
     [Inject] public IJSRuntime JsRuntime { get; set; } = default!;
+    
+    [CascadingParameter] private EditContext? EditContext { get; set; }
     
     [Parameter] public string Label { get; set; } = string.Empty;
     [Parameter] public List<T> DropdownItems { get; set; } = new();
@@ -19,6 +23,7 @@ public partial class DropdownList<T> : IAsyncDisposable
     [Parameter] public bool RoundedCorners { get; set; }
     [Parameter] public bool ShowBoxShadowOnBody { get; set; }
     [Parameter] public string ValuePropertyName { get; set; }
+    [Parameter] public Expression<Func<T>> For { get; set; } 
 
     private bool isOpen = false;
     private bool _isClosing = false;
@@ -26,9 +31,11 @@ public partial class DropdownList<T> : IAsyncDisposable
     private ElementReference DropdownRef;
     private string _searchStr;
     private List<T> _filteredItems;
-    private string _cssClassesActivator;
+    private string _cssClassesActivator = string.Empty;
     private string _cssClassesBody;
     private bool _roundedCorners;
+    private bool _isInvalid;
+    private string _validCssClassesActivator = string.Empty;
 
     protected override void OnParametersSet()
     {
@@ -64,6 +71,24 @@ public partial class DropdownList<T> : IAsyncDisposable
         {
             _cssClassesBody += " shadow";
         }
+        if (EditContext != null)
+        {
+            EditContext.OnValidationStateChanged += HandleValidationStateChanged;
+        }
+    }
+    
+    private void HandleValidationStateChanged(object? sender, ValidationStateChangedEventArgs e)
+    {
+        if (EditContext != null && For != null)
+        {
+            var fieldIdentifier = FieldIdentifier.Create(For);
+            _isInvalid = EditContext.GetValidationMessages(fieldIdentifier).Any();
+
+            _validCssClassesActivator = _isInvalid ? " invalid" :
+                _validCssClassesActivator.Contains("invalid") ? _validCssClassesActivator.Replace("invalid", "") : "";
+        }
+
+        StateHasChanged();
     }
 
     private void OnSearchInputChanged(string value)
@@ -151,6 +176,16 @@ public partial class DropdownList<T> : IAsyncDisposable
     {
         Value = item;
         await ValueChanged.InvokeAsync(Value);
+        if (EditContext != null && For != null)
+        {
+            var fieldIdentifier = FieldIdentifier.Create(For);
+            EditContext.NotifyFieldChanged(fieldIdentifier);
+
+            _isInvalid = EditContext.GetValidationMessages(fieldIdentifier).Any();
+        
+            _validCssClassesActivator = _isInvalid ? " invalid" :
+                _validCssClassesActivator.Contains("invalid") ? _validCssClassesActivator.Replace("invalid", "") : "";
+        }
         await ToggleDropdown();
     }
 
@@ -159,6 +194,10 @@ public partial class DropdownList<T> : IAsyncDisposable
         if (_dotNetHelper is not null)
         {
             _dotNetHelper.Dispose();
+        }
+        if (EditContext != null)
+        {
+            EditContext.OnValidationStateChanged -= HandleValidationStateChanged;
         }
     }
 }

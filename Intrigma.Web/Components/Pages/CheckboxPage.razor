@@ -4,7 +4,7 @@
     <p>Simple checkbox usage</p>
     <br>
     <br>
-    <Checkbox @bind-IsChecked="_isChecked" Label="Over 18?" />
+    <Checkbox @bind-IsChecked="_isChecked" For="() => _isChecked" Label="Over 18?" />
     <br>
     <span>ischecked: @_isChecked</span>
 </div>
@@ -17,28 +17,28 @@
 <div class="row">
     <div class="col-md-6 mb-4">
         <span>Small size</span>
-        <Checkbox @bind-IsChecked="_isCheckedSm" Size="CheckboxSize.Small" Label="Over 18?" />
+        <Checkbox @bind-IsChecked="_isCheckedSm" For="() => _isCheckedSm" Size="CheckboxSize.Small" Label="Over 18?" />
         <br>
         <span>_isCheckedSm: @_isCheckedSm</span>
         <br>
     </div>
     <div class="col-md-6 mb-4">
         <span>Medium size</span>
-        <Checkbox @bind-IsChecked="_isCheckedMd" Size="CheckboxSize.Medium" Label="Over 18?" />
+        <Checkbox @bind-IsChecked="_isCheckedMd" For="() => _isCheckedMd" Size="CheckboxSize.Medium" Label="Over 18?" />
         <br>
         <span>_isCheckedMd: @_isCheckedMd</span>
         <br>
     </div>
     <div class="col-md-6 mb-4">
         <span>Large size</span>
-        <Checkbox @bind-IsChecked="_isCheckedLg" Size="CheckboxSize.Large" Label="Over 18?" />
+        <Checkbox @bind-IsChecked="_isCheckedLg" For="() => _isCheckedLg" Size="CheckboxSize.Large" Label="Over 18?" />
         <br>
         <span>_isCheckedLg: @_isCheckedLg</span>
         <br>
     </div>
     <div class="col-md-6 mb-4">
         <span>XLarge size</span>
-        <Checkbox @bind-IsChecked="_isCheckedXlg" Size="CheckboxSize.XLarge" Label="Over 18?" />
+        <Checkbox @bind-IsChecked="_isCheckedXlg" For="() => _isCheckedXlg" Size="CheckboxSize.XLarge" Label="Over 18?" />
         <br>
         <span>_isCheckedXlg: @_isCheckedXlg</span>
         <br>
@@ -53,6 +53,7 @@
     <div class="col-md-6 mb-4">
         <span>Primary</span>
         <Checkbox @bind-IsChecked="_isCheckedPrimary"
+                  For="() => _isCheckedPrimary"
                   Size="CheckboxSize.Large"
                   Label="Over 18?"
                   UiType="CheckboxUiType.Primary" />
@@ -63,6 +64,7 @@
     <div class="col-md-6 mb-4">
         <span>Secondary</span>
         <Checkbox @bind-IsChecked="_isCheckedSecondary"
+                  For="() => _isCheckedSecondary"
                   Size="CheckboxSize.Large"
                   Label="Over 18?"
                   UiType="CheckboxUiType.Secondary"  />
@@ -73,6 +75,7 @@
     <div class="col-md-6 mb-4">
         <span>Success</span>
         <Checkbox @bind-IsChecked="_isCheckedSuccess"
+                  For="() => _isCheckedSuccess"
                   Size="CheckboxSize.Large"
                   Label="Over 18?"
                   UiType="CheckboxUiType.Success"  />

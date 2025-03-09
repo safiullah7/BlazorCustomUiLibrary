@@ -11,3 +11,7 @@
 ::deep .textarea.rounded-corners {
     border-radius: 14px;
 }
+::deep .textarea.invalid {
+    border: 1px solid red !important;
+    outline: unset;
+}

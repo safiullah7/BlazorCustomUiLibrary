@@ -22,13 +22,17 @@
     user-select: none;
     background: white;
 }
+.activator.invalid {
+    border: 1px solid red !important;
+    outline: unset;
+}
 .activator-text {
     color: #6c6d6e;
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflowing text */
-    text-overflow: ellipsis; /* Show "..." when text overflows */
-    max-width: 100%; /* Ensure it doesn’t exceed the parent width */
-    display: block; /* Ensure it behaves correctly inside flex containers */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: block;
 }
 .activator.activator-active {
     border: 2px solid #4fa9e1;
@@ -115,8 +119,10 @@
     height: 46px;
     display: flex;
     align-items: center;
-    border-radius: 10px;
     font-size: 20px;
+}
+.rounded-corners .dropdown-item {
+    border-radius: 10px;
 }
 .dropdown-item:hover {
     background-color: #f1f1f1;

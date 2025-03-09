@@ -1,7 +1,10 @@
 @page "/complete-form"
+@using System.ComponentModel.DataAnnotations
+@using Intrigma.UI.Shared.Validators
 
 <h3>Employee Create</h3>
 <Checkbox @bind-IsChecked="@_isCheckedRoundedCorners"
+          For="() => _isCheckedRoundedCorners"
           Size="CheckboxSize.Large"
           Label="Rounded corners?"
           OnCheckedChanged="OnRoundedChanged"
@@ -10,62 +13,66 @@
 <div class="row">
     <div class="col-5">
         <div class="container">
-            <div class="row align-items-end">
-                <div class="col-6">
-                    <TextInput @bind-Value="@_employee.Name"
-                               Label="Name"
-                               RoundedCorners="_isCheckedRoundedCorners"
-                               Placeholder="Enter value"
-                               For="() => _employee.Name" />
-                </div>
-                <div class="col-6">
-                    <DropdownList @bind-Value="_employee.Department"
-                                  Label="Department"
-                                  RoundedCorners="_isCheckedRoundedCorners"
-                                  ShowSearch="true"
-                                  DropdownItems="departments"
-                                  ActivatorPlaceholderText="Select a department" />
-                </div>
-            </div>
-
-            <br>
-            <TextInput @bind-Value="@_employee.Email"
-                       RoundedCorners="_isCheckedRoundedCorners"
-                       Type="email"
-                       Label="Email"
-                       ShowClearIcon="true"
-                       Placeholder="Enter email"
-                       For="() => _employee.Email" />
-            <br>
-            <TextArea @bind-Value="_employee.About"
-                      Label="About"
-                      RoundedCorners="_isCheckedRoundedCorners"
-                      Placeholder="Enter description"
-                      For="() => _employee.About"
-                      Style="height: 160px;"></TextArea>
-            <br>
-            <br>
-            <Checkbox @bind-IsChecked="_employee.HasAgreedTermsAndConditions"
-                      Size="CheckboxSize.Large"
-                      Label="Do you agree with the terms and conditions?"
-                      UiType="CheckboxUiType.Success"  />
-            <br>
-            <Button Type="button"
-                    Styles="width: 100%;"
-                    ButtonType="ButtonType.Success"
-                    Size="ButtonSize.Large"
-                    RoundedCorners="_isCheckedRoundedCorners"
-                    OnClickCb="OnClickLoading">
-                @if (_loading)
-                {
-                    <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status">
+            <EditForm Model="_employee" OnValidSubmit="OnClickLoading">
+                <DataAnnotationsValidator />
+                <div class="row">
+                    <div class="col-6">
+                        <TextInput @bind-Value="@_employee.Name"
+                                   Label="Name"
+                                   RoundedCorners="_isCheckedRoundedCorners"
+                                   Placeholder="Enter value"
+                                   For="() => _employee.Name"/>
                     </div>
-                }
-                else
-                {
-                    <span>Click me!</span>
-                }
-            </Button>
+                    <div class="col-6">
+                        <DropdownList @bind-Value="_employee.Department"
+                                      For="() => _employee.Department"
+                                      Label="Department"
+                                      RoundedCorners="_isCheckedRoundedCorners"
+                                      ShowSearch="true"
+                                      DropdownItems="departments"
+                                      ActivatorPlaceholderText="Select a department"/>
+                    </div>
+                </div>
+                <br>
+                <TextInput @bind-Value="@_employee.Email"
+                           RoundedCorners="_isCheckedRoundedCorners"
+                           Type="email"
+                           Label="Email"
+                           ShowClearIcon="true"
+                           Placeholder="Enter email"
+                           For="() => _employee.Email"/>
+
+                <br>
+                <TextArea @bind-Value="_employee.About"
+                          Label="About"
+                          RoundedCorners="_isCheckedRoundedCorners"
+                          Placeholder="Enter description"
+                          For="() => _employee.About"
+                          Style="height: 160px;"></TextArea>
+                <br>
+                <br>
+                <Checkbox @bind-IsChecked="_employee.HasAgreedTermsAndConditions"
+                          Size="CheckboxSize.Large"
+                          For="() => _employee.HasAgreedTermsAndConditions"
+                          Label="Do you agree with the terms and conditions?"
+                          UiType="CheckboxUiType.Success"/>
+                <br>
+                <Button Type="submit"
+                        Styles="width: 100%;"
+                        ButtonType="ButtonType.Success"
+                        Size="ButtonSize.Large"
+                        RoundedCorners="_isCheckedRoundedCorners">
+                    @if (_loading)
+                    {
+                        <div class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status">
+                        </div>
+                    }
+                    else
+                    {
+                        <span>Click me!</span>
+                    }
+                </Button>
+            </EditForm>
         </div>
     </div>
     <div class="col-2 d-flex justify-content-center" style="width: 60px;">
@@ -134,10 +141,19 @@
     
     public class Employee
     {
+        [Required]
         public string Name { get; set; }
+        
+        [Required]
         public string Email { get; set; }
+        
+        [Required]
         public string Department { get; set; }
+        
+        [Required]
         public string About { get; set; }
+        
+        [MustBeTrue]
         public bool HasAgreedTermsAndConditions { get; set; }
     }
 

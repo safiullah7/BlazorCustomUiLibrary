@@ -5,15 +5,16 @@
     }
 
     <div class="input-group">
-        <InputText Value="@Value" 
+        <InputText Value="@_value"
+                   ValueChanged="ValueChanged"
+                   ValueExpression="For"
                    type="@Type"
-                   ValueChanged="ValueChanged" 
-                   ValueExpression="For" 
-                   placeholder="@Placeholder" 
-                   @oninput="OnInput" 
-                   class="@_cssClasses"/>
+                   placeholder="@Placeholder"
+                   class="@_cssClasses"
+                   @oninput="OnInput"
+                   @onblur="OnBlur"/>
 
-        @if (ShowClearIcon)
+        @if (ShowClearIcon && !string.IsNullOrEmpty(_value))
         {
             <span class="clear-icon" @onclick="ClearText">
                 ✖️

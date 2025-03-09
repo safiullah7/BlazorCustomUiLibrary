@@ -10,6 +10,17 @@
     background: #edebeb;
     border-radius: 6px;
 }
+::deep .cb {
+}
+::deep .cb.invalid {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -o-appearance: none;
+    -webkit-box-shadow: 0 0 0 2px rgba(255,0,0,1);
+    -moz-box-shadow: 0 0 0 2px rgba(255,0,0,1);
+    box-shadow: 0 0 0 2px rgba(255,0,0,1);
+    border-radius: 2px;
+}
 ::deep .cb:hover {
     cursor: pointer;
 }
@@ -20,9 +31,9 @@
 
 ::deep .lb {
     cursor: pointer !important;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 ::deep .cb-sm {

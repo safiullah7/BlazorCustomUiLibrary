@@ -22,3 +22,7 @@
     box-shadow: unset;
     border: 2px solid #4fa9e1 !important;
 }
+::deep .form-control.invalid {
+    border: 1px solid red !important;
+    outline: unset;
+}

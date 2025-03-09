@@ -5,10 +5,11 @@
     @*        class="@_cssClasses" *@
     @*        style="@CheckboxStyles" *@
     @*        @bind-value:after="CheckboxChanged"> *@
-    <InputCheckbox @bind-Value="IsChecked"
-                   @bind-Value:after="CheckboxChanged"
+    <InputCheckbox Value="IsChecked"
+                   ValueChanged="IsCheckedChanged"
+                   ValueExpression="For"
                    id="@_cbId"
-                   class="@_cssClasses"
+                   class="@($"{_cssClasses} {_validityCssClass}")"
                    style="@CheckboxStyles" />
     
     @if (!string.IsNullOrEmpty(Label))
